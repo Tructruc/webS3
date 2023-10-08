@@ -7,11 +7,11 @@
 			$page = pathinfo($_SERVER['PHP_SELF'], PATHINFO_BASENAME);
 			// echo $page;
 			echo '<li class="nav-item">';
-			if ($page == 'index.php') {
-				echo '<a class="nav-link active" href="index.php">Accueil</a>';
+			if ($page == 'traitConnexion.php') {
+				echo '<a class="nav-link active" href="traitConnexion.php">Accueil</a>';
 			}
 			else {
-				echo '<a class="nav-link" href="index.php">Accueil</a>';
+				echo '<a class="nav-link" href="traitConnexion.php">Accueil</a>';
 			}
 			echo '</li>';
 			

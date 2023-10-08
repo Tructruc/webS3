@@ -10,16 +10,16 @@
 			$files = array_slice($files1, 2);
 			
 			echo '<li class="nav-item">';
-			if ($page == 'index.php') {
-				echo '<a class="nav-link active" href="index.php">Accueil</a>';
+			if ($page == 'traitConnexion.php') {
+				echo '<a class="nav-link active" href="traitConnexion.php">Accueil</a>';
 			}
 			else {
-				echo '<a class="nav-link" href="index.php">Accueil</a>';
+				echo '<a class="nav-link" href="traitConnexion.php">Accueil</a>';
 			}
 			echo '</li>';
 			
 			foreach ($files as $key => $file){
-				if ($file != "index.php"){
+				if ($file != "traitConnexion.php"){
 					if (str_ends_with($file, '.php')){
 						$str = str_replace(".php", "", $file);
 						echo '<li class="nav-item">';
