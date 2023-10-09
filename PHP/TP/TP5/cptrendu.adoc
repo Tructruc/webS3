@@ -1,0 +1,36 @@
+= TP5 DevWeb : MySQL et PDO
+:toc-title: Table des matières
+:toc:
+:title-page:
+:sectnums:
+:title-logo-image: image:/Logo_IUT_Blagnac.png[]
+:stem: asciimath
+Emilien FIEU 3A
+
+== Introduction
+
+Dans ce TP, nous allons apprendre à utiliser MySQL avec PHP. Nous allons utiliser PDO pour nous connecter à la base de données.
+
+== Création de la base de données Camping
+
+[source,sql]
+----
+include::CreaBaseCampingAtrous.sql[]
+----
+
+== Modifier les pages existantes
+
+=== Renommer le titre du header.php en « TP5 PHP - Camping de la Grande Bleue »
+
+==== Capture d’écran
+
+.Titre de la page
+image::img/titre.png[]
+
+=== Enlever l’affichage des sessions et cookies existants de la page index.php et ajoutez-y le message « Bienvenue dans notre Camping de la Grande Bleue ! ».
+
+==== Capture d’écran
+
+image::img/index.png[]
+
+=== Créer le script connect.inc.php
