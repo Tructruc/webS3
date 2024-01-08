@@ -38,7 +38,31 @@ if ($page != "identification.php"){
         <form name="consultType" method="post" action="consultType.php">
             <table>
                 <?php
-                include ("initTableaux.php");
+                include ("connect.inc.php");
+                $tabType = [];
+
+                $sql = "SELECT * FROM `Type`";
+
+
+                try {
+                    // Prepare the SQL query
+                    $stmt = $pdo->prepare($sql);
+
+                    // Execute the statement
+                    $stmt->execute();
+
+                    $temptab = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    // Get the result set
+                    foreach ($temptab as $type){
+                        $tabType[$type["idType"]] = $type["nomType"];
+                    }
+
+                } catch (PDOException $e) {
+                    // Handle any errors
+                    die("Error: " . $e->getMessage());
+                }
+
                 // liste déroulante
                 echo "<select name='type'>";
 
@@ -54,35 +78,12 @@ if ($page != "identification.php"){
             </table>
         </form>
         <?php
-        include ("connect.inc.php");
+
 
         if (isset($_POST["submit"])){
 
             $type = htmlentities($_POST["type"]);
             $tab = [];
-
-            $tabType = [];
-
-            $sql = "SELECT * FROM `Type`";
-
-            try {
-                // Prepare the SQL query
-                $stmt = $pdo->prepare($sql);
-
-                // Execute the statement
-                $stmt->execute();
-
-                $temptab = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                // Get the result set
-                foreach ($temptab as $type){
-                    $tabType[$type["idType"]] = $type["nomType"];
-                }
-
-            } catch (PDOException $e) {
-                // Handle any errors
-                die("Error: " . $e->getMessage());
-            }
 
 
 
@@ -107,7 +108,7 @@ if ($page != "identification.php"){
 
 
             if (count($tab) == 0){
-                echo "<h3 style='color: red'>Aucun emplacement de type $type</h3>";
+                echo "<h3 style='color: red'>Aucun emplacement de type $tabType[$type]</h3>";
             }else{
                 echo "<table class='table table-bordered table-striped'>";
                 echo "<thead class='thead-dark'>";
