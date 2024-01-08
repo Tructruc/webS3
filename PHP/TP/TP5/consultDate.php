@@ -64,26 +64,38 @@ if ($page != "identification.php"){
         </form>
         <?php
 
+
             if (isset($_POST["submit"])){
-                include ("initTableaux.php");
+                include 'connect.inc.php';
                 $annee = htmlentities($_POST["annee"]);
                 $tab = [];
 
-                foreach ($tabEmplacement as $emplacement){
-                    if ($annee == "-2000"){
-                        if ($emplacement["annee"] < 2000){
-                            $tab[] = $emplacement;
-                        }
-                    }elseif ($annee == "2000-2009"){
-                        if ($emplacement["annee"] >= 2000 && $emplacement["annee"] < 2010){
-                            $tab[] = $emplacement;
-                        }
-                    }elseif ($annee == "2010-"){
-                        if ($emplacement["annee"] >= 2010){
-                            $tab[] = $emplacement;
-                        }
-                    }
+
+
+
+                if ($annee == "-2000"){
+                    $sql = "SELECT * FROM `Emplacement` WHERE `annee` < 2000";
+                }elseif ($annee == "2000-2009"){
+                    $sql = "SELECT * FROM `Emplacement` WHERE `annee` >= 2000 AND `annee` < 2010";
+                }elseif ($annee == "2010-"){
+                    $sql = "SELECT * FROM `Emplacement` WHERE `annee` >= 2010";
                 }
+                echo $sql;
+                try {
+                    // Prepare the SQL query
+                    $stmt = $pdo->prepare($sql);
+
+                    // Execute the statement
+                    $stmt->execute();
+
+                    // Get the result set
+                    $tab = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                } catch (PDOException $e) {
+                    // Handle any errors
+                    die("Error: " . $e->getMessage());
+                }
+
                 echo "<table class='table table-bordered'>";
                 echo "<tr><th>Identifiant</th><th>Type</th><th>Adresse</th><th>Année de construction</th></tr>";
                 foreach ($tab as $emplacement){
